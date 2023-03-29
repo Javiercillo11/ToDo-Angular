@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1> LISTA DE TAREAS </h1>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8">
+            <input type="text" class="form-control" name="task" placeholder="Añadir Tarea" #taskInput>
+        </div>
+
+        <div class="col-xs-4">
+            <button class="btn btn-primary" (click)="addTask(taskInput)">Añadir</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tareas</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let task of tasks; let idx = index">
+                        <td *ngIf="task.is_canceled; else elseTd">
+                            <s>{{ idx + 1 }}. {{task.title}}</s>
+                        </td>
+                        <ng-template #elseTd>
+                            <td>{{ idx + 1 }}. {{task.title}}</td>
+                        </ng-template>
+
+                        <td>
+                            <button class="btn btn-primary btn-xs" (click)="editTask(idx)"> Editar </button>
+                        </td>
+
+                        <td>
+                            <button class="btn btn-warning btn-xs" (click)="cancelTask(idx)"> Hecho </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-xs" (click)="deleteTask(idx)"> Borrar </button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <br>
+                        <button class="btn btn-info" (click)="clearToDo()">Limpiar Todo</button>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
